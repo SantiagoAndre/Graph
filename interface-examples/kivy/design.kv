@@ -1,0 +1,95 @@
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
+
+<MyScreenManager>:
+	transition: WipeTransition()
+	ButtonsScreen:
+	NodeMgmntScreen:
+	EdgeMgmntScreen:
+<ButtonsScreen>
+	name: 'buttons_screen'
+	BoxLayout:
+		id: BtnLyt
+		orientation: "vertical"
+		canvas:
+			Color:
+				rgb: 1,0,0
+		Button:
+			text: "Add node"
+			on_press: root.manager.current = 'node_screen'
+		Button:
+			text: "Del node"
+			on_press: root.manager.current = 'node_screen'
+		Button:
+			text: "Add edge"
+			on_press: root.manager.current = 'edge_screen'
+		Button:
+			text: "Del edge"
+			on_press: root.manager.current = 'edge_screen'
+		Button:
+			text: "Save Graph"
+			on_press: BtnLyt.save()
+
+<NodeMgmntScreen>
+	name: 'node_screen'
+	BoxLayout:
+		id: NodeLyt
+		spacing: 20
+		padding: [0,200,0,200]
+		orientation: "vertical"
+		Label:
+			text: "Management node"
+		BoxLayout:
+			orientation: "horizontal"
+			spacing: 20
+			padding: [0,40,0,40]
+			Label:
+				text: "Name node:"
+			TextInput:
+				id: TxtName
+		Button:
+			text: "Ok."
+			on_press: root.manager.current = 'buttons_screen'
+
+<EdgeMgmntScreen>
+	name: 'edge_screen'
+	BoxLayout:
+		padding: [0,200,0,200]
+		spacing: 20
+		id: NodeLyt
+		orientation: "vertical"
+		Label:
+			text: "Management edge"
+		BoxLayout:
+			size_hint: 
+			spacing: 20
+			padding: [0,40,0,40]
+			orientation: "horizontal"
+			Label:
+				
+				text: "Name initial node:"
+			TextInput:
+				id: TxtNameInit
+		BoxLayout:
+			spacing: 20
+			padding: [0,40,0,40]
+			orientation: "horizontal"
+			Label:
+				text: "Name final node:"
+			TextInput:
+				id: TxtNameFnl
+		Button:
+			text: "Ok."
+			on_press: root.manager.current = 'buttons_screen'
+<MainLayout>
+	id: 'main'
+	MyScreenManager:
+		id: 'screen'
+		size_hint: 0.5,1
+	FloatLayout:
+		id: GraphLyt
+		canvas:
+			Color:
+				rgb: 1, 1, 1
+			Ellipse:
+				pos: self.pos
+				size: 100,100
